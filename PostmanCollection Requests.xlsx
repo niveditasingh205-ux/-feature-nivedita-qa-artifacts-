@@ -1,0 +1,58 @@
+Klodr API Postman Collection (10 Requests)				
+1. POST: Login (Positive - Happy Path)				
+Action: Authenticate a valid salon owner to receive a digital access key (Bearer Token)				
+Endpoint: https://cognito-idp.ap-south-1.amazonaws.com/.				
+"Headers: X-Amz-Target: AWSCognitoIdentityProviderService.InitiateAuth, Content-Type: application/json"				
+"Payload: Includes AuthFlow: ""USER_PASSWORD_AUTH"", ClientId, and AuthParameters with valid credentials."				
+Expected Result: 200 OK status with a JSON response containing the token.				
+Actual Result: 200 ok				
+2. POST: Login (Negative - Sad Path)				
+Action: Attempt login with an invalid password to verify security boundaries.				
+Payload: Use the correct USERNAME but change the PASSWORD to an incorrect string.				
+Expected Result: 400 Bad Request or 401 Unauthorized.				
+Actual Result: 400 Bad Request				
+3. GET: Fetch Salon Branches (Positive - Happy Path)				
+Action: Retrieve a list of all branches managed under the authenticated salon account				
+Endpoint: https://dev-one.klodr.com/branches.				
+Header: Authorization: Bearer {{token}}				
+Expected Result: 200 OK with a JSON list of branch objects.				
+Actual Result: 200 ok				
+4. GET: Fetch Branding Details (Positive - Happy Path)				
+"Action: Verify that branch-specific assets (logos, colors) are correctly retrieved"				
+Endpoint: https://dev-one.klodr.com/branding.				
+Expected Result: 200 OK with URLs for logo images.				
+Actual Result: 200 ok				
+5. POST: Create Appointment (Positive - Happy Path)				
+Action: Book a multi-service salon appointment through the ERP module				
+Endpoint: https://dev-one.klodr.com/erp/appointments				
+"Payload: A detailed JSON object containing appointmentId, customerPhone, and a services array (e.g., Facial, De-Tan) [Conversation History]."				
+"Expected Result: 201 Created or 200 OK, confirming the new resource is stored in the database."				
+Actual Result 200 OK				
+6. POST: Create Appointment (Negative - Bug Validation)				
+Action: Test the system's backend validation by attempting to book an appointment for a past date				
+"Payload: { ""date"": ""2020-01-01"", ""customerPhone"": ""+918435237164"" }"				
+Expected Result: Ideally 400 Bad Request.				
+Actual Result: 200 ok				
+7. PATCH: Update Appointment Time (Positive - Happy Path)				
+Action: Perform a partial update to change only the time of an existing booking				
+Endpoint: https://dev-one.klodr.com/erp/appointments/{{appointment_id}}				
+Payload: { "time": "17:30" }				
+Expected Result: 200 OK showing the updated record.				
+Actual Result : 200 OK				
+8. PUT: Replace Loyalty Member Profile (Positive - Happy Path)				
+Action: Update the entire member profile in the loyalty engine				
+Endpoint: https://dev-one.klodr.com/loyalty/members/{{member_id}}				
+"Payload: Includes all mandatory fields (name, phone, email) for a complete resource replacement"				
+Expected Result: 200 OK				
+Actual Result: 200 ok				
+9. DELETE: Cancel Appointment (Positive - Happy Path)				
+Action: Remove an appointment resource to ensure data integrity				
+Endpoint: https://dev-one.klodr.com/erp/appointments/{{appointment_id}}				
+"Expected Result: 204 No Content, signifying successful deletion with no body returned."				
+Actual Result : 200 OK				
+10. DELETE: Cancel Appointment (Negative - Sad Path)				
+Action: Attempt to delete a booking without providing a valid Bearer Token				
+Header: Leave the Authorization header empty or use an expired token.				
+"Expected Result: 401 Unauthorized or 403 Forbidden, proving that the API Gateway protects the ""inner boundary"" from unauthenticated access"				
+Actual Result: 403 forbidden				
+				
