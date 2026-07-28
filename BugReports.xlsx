@@ -1,0 +1,153 @@
+Bug 1: System Allows Booking Appointments in the Past					
+					
+Severity: Medium (Impacts business logic and scheduling accuracy)					
+Priority: High (Essential for a functional Salon ERP)					
+Steps to Reproduce:					
+					
+Log in to the Salon ERP dashboard.					
+Navigate to the appointment booking section.					
+Select today's date.					
+"Choose a time that has already passed (e.g., select 6:00 PM when the current system time is 9:00 PM)."					
+Click the "Book" button.					
+					
+Expected Result: The system should block the booking with an error message stating that past times are invalid for new appointments.					
+"Actual Result: The system did not block the action, and the appointment was confirmed ."					
+					
+Note: unable to provide the screenshot as there is some change in the system and also appointment booking time is not reflecting in the system					
+					
+Bug 2: Bug/Feature Request: Branch filter does not isolate loyalty members on Members page					
+					
+"Description: When a specific branch is selected from the top branch switcher dropdown (e.g., ""Main Branch""), the Loyalty > Members directory continues to display all customers globally across all branches, instead of filtering the list to show only the members registered to or associated with the active branch."					
+					
+Steps to Reproduce:					
+					
+"Select a specific branch from the global top-left branch dropdown (e.g., ""Main Branch"")."					
+Navigate to the Loyalty Members module.					
+					
+Observe the member list.					
+					
+Severity: Low (Cosmetic / UI Workflow inconsistency)					
+					
+Priority: Medium (Important if branches are managed by different staff who should not see other branches' customer lists/phone numbers).					
+					
+"Expected Result: The member directory filters to only display customers belonging to the selected branch, or the global branch selector communicates that it is viewing ""All Branches"" data."					
+					
+Actual Result: Customers from all branches are visible simultaneously despite a single branch being selected in the global header.					
+					
+"=DISPIMG(""ID_ECED6AA1464245A3B9CFC4075D8A5C94"",1)"					
+					
+Bug 3: Password Validation Fails to Enforce Maximum Length (33 Characters)					
+					
+Severity: Low (Edge case security validation)					
+Priority: Low (Minor UI/Validation fix)					
+Steps to Reproduce:					
+					
+Navigate to the password reset or creation screen.					
+Enter a password consisting of 33 characters.					
+Submit the form.					
+					
+"Expected Result: The system should reject the input and display a ""Password too long"" error, adhering to Boundary Value Analysis (BVA) limits."					
+Actual Result: The 33-character password was accepted .					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+Bug 4: Missing "Delete" Functionality for Appointments					
+					
+Severity: High (Critical "missing functionality")					
+Priority: Medium (Required for data management)					
+Steps to Reproduce:					
+					
+Open an appointment in the Salon ERP that already has an associated invoice and loyalty points.					
+Attempt to find an option to Delete the record to fix an entry error.					
+					
+Expected Result: An "Owner" or "Admin" should have the ability to delete or remove erroneous records to maintain clean data.					
+Actual Result: No delete option exists in the UI; only "Reject" or "Cancel" are available .					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+Bug 5: "PDF is still generating" error when clicking Credit Note on refunded invoice					
+					
+"Severity: Medium (The core accounting functionality (refunding) works, and data integrity is not lost, but a key user workflow—downloading or viewing the official Credit Note PDF—is blocked.)"					
+"Priority: High (Credit notes are compliance and customer-facing documents. Users need to issue or print them immediately after a refund is processed, meaning this blocks daily business operations and customer communications.)"					
+Steps to Reproduce:					
+					
+Navigate to the Invoices module.					
+					
+"Open an invoice that is marked with the ""Refunded"" status (e.g., Invoice INV-2627-00001)."					
+					
+Click on the action button to view or access the Credit Note.					
+					
+Expected Result: The platform should load or download the generated Credit Note PDF document for the refunded transaction.					
+					
+"=DISPIMG(""ID_310424F60DD04F75ABFA9899264DEBBF"",1)"					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+Part 2: Smoke Testing Checklist					
+This smoke checklist is a "quick health check" to ensure critical features are not broken after a deployment.					
+Area	Expected Result	Status (P/F)			
+Login	User redirected to the dashboard.	Pass			
+Dashboard	"All modules (ERP, Loyalty, Billing) are visible."	Pass			
+Document Upload	File appears in the "Document List" without errors.	Pass			
+Send for Signing	PDF directly opens or downloads immediately	Pass			
+Notification	Notification is triggered/delivered successfully.	Pass			
+Logout	Session is destroyed and user is returned to the login screen	Pass			
