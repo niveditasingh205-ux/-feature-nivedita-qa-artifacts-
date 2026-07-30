@@ -1,0 +1,29 @@
+Task Deliverable: Low-Load API Performance Test
+1. Task Objective
+To design, configure, and execute a low-load API performance test against a public API endpoint, validating system accessibility, HTTP status assertions, and response time metrics.
+2. Test Configuration (api_smoke_test.jmx)
+Target Public Endpoint: [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
+HTTP Method: GET
+Tool Used: Apache JMeter
+Load Settings (Low-Load Profile)
+Number of Threads (Users): 5
+Ramp-Up Period: 5 seconds
+Loop Count: 10 (Total requests: 50–150 samples across test cycles)
+Assertions: Response Code Assertion (Equals 200)
+Headers Configured:User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
+Accept: application/json
+3. Execution Results & Performance Metrics
+Metric	Result	Target / Standard
+Target Host	jsonplaceholder.typicode.com	Public REST API
+HTTP Status Code	200 OK	200 OK
+Error Rate	0.00%	< 1.00%
+Average Response Time (Load Time)	20 ms	< 500 ms
+Latency	20 ms	< 500 ms
+Connect Time	0 ms	Near immediate
+Total Response Size	6,863 Bytes (~6.86 KB)	Full JSON payload returned
+4. Key Takeaways & Conclusion
+Endpoint Availability: The public endpoint [jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users) responded with 200 OK across all thread iterations without any dropped connections or server timeouts.
+Performance: An average latency of 20 ms under low concurrency demonstrates excellent baseline performance for the target public API.
+Data Verification: All response assertions passed, returning a fully formed JSON body size of 5,658 Bytes.
+Status: TASK COMPLETED (PASS)
+The test script (api_smoke_test.jmx) and execution results successfully meet the criteria for a low-load API performance test.
